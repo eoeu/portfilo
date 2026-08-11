@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ياسين — استراتيجي محتوى ومنتج موشن جرافيك</title>
+<title id="pageTitle">ياسين — استراتيجي محتوى ومنتج موشن جرافيك</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FAFAF8;
@@ -25,13 +25,13 @@
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:'IBM Plex Sans Arabic', sans-serif;
+    font-family:'IBM Plex Sans Arabic', 'Inter', sans-serif;
     font-weight:400;
     line-height:1.7;
     overflow-x:hidden;
   }
   h1,h2,h3,.display{
-    font-family:'Cairo', sans-serif;
+    font-family:'Cairo', 'Inter', sans-serif;
     font-weight:800;
     letter-spacing:-0.01em;
   }
@@ -39,7 +39,6 @@
   img{max-width:100%;display:block;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
 
-  /* focus visibility */
   a:focus-visible, button:focus-visible{
     outline:2px solid var(--teal);
     outline-offset:3px;
@@ -57,33 +56,36 @@
   }
   nav{
     display:flex; align-items:center; justify-content:space-between;
-    padding:18px 32px; max-width:1180px; margin:0 auto;
+    padding:18px 32px; max-width:1180px; margin:0 auto; gap:20px;
   }
   .brand{
     font-family:'Cairo',sans-serif; font-weight:800; font-size:19px;
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:10px; white-space:nowrap;
   }
   .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);}
   .nav-links{display:flex; gap:34px; font-size:15px; font-weight:500; color:var(--ink-soft);}
   .nav-links a{position:relative; padding:4px 0; transition:color .2s;}
   .nav-links a:hover{color:var(--ink);}
   .nav-links a::after{
-    content:''; position:absolute; right:0; bottom:-2px; width:0; height:1px;
+    content:''; position:absolute; inset-inline-start:0; bottom:-2px; width:0; height:1px;
     background:var(--teal); transition:width .25s ease;
   }
   .nav-links a:hover::after{width:100%;}
-  .nav-cta{
-    font-size:14px; font-weight:600; background:var(--ink); color:var(--white);
-    padding:10px 22px; border-radius:100px; transition:background .2s;
+
+  .lang-toggle{
+    display:flex; align-items:center; gap:2px;
+    border:1px solid var(--line); border-radius:100px; padding:3px;
+    background:var(--white); flex-shrink:0;
   }
-  .nav-cta:hover{background:var(--teal-deep);}
-  .menu-btn{display:none;}
+  .lang-btn{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:700;
+    padding:7px 14px; border-radius:100px; color:var(--muted);
+    background:transparent; border:none; cursor:pointer; transition:all .2s;
+  }
+  .lang-btn.active{background:var(--ink); color:var(--white);}
 
   /* ===== HERO ===== */
-  .hero{
-    padding:120px 0 70px;
-    position:relative;
-  }
+  .hero{ padding:120px 0 70px; position:relative; }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-size:13px; font-weight:600; color:var(--teal);
@@ -91,68 +93,41 @@
   }
   .eyebrow::before{content:'';width:22px;height:1px;background:var(--teal);}
   .hero h1{
-    font-size:clamp(34px, 5.4vw, 62px);
-    line-height:1.18;
+    font-size:clamp(32px, 5.2vw, 60px);
+    line-height:1.2;
     max-width:920px;
     color:var(--ink);
   }
-  .hero h1 em{
-    font-style:normal; color:var(--teal);
-    position:relative;
-  }
+  .hero h1 em{ font-style:normal; color:var(--teal); }
   .hero-sub{
     margin-top:28px; font-size:18px; color:var(--ink-soft);
     max-width:620px; font-weight:400;
   }
-  .hero-actions{display:flex; gap:16px; margin-top:42px; flex-wrap:wrap;}
-  .btn-primary{
-    background:var(--ink); color:var(--white); padding:15px 32px;
-    border-radius:100px; font-weight:600; font-size:15px;
-    display:inline-flex; align-items:center; gap:10px;
-    transition:transform .2s ease, background .2s ease;
-  }
-  .btn-primary:hover{background:var(--teal-deep); transform:translateY(-2px);}
-  .btn-ghost{
-    border:1px solid var(--line); padding:15px 32px; border-radius:100px;
-    font-weight:600; font-size:15px; color:var(--ink);
-    transition:border-color .2s ease, background .2s ease;
-  }
-  .btn-ghost:hover{border-color:var(--ink); background:var(--white);}
 
-  /* ===== STAT TICKER (signature element) ===== */
+  /* ===== STAT TICKER ===== */
   .ticker-section{
     margin-top:80px;
     border-top:1px solid var(--line);
     border-bottom:1px solid var(--line);
-    background:var(--ink);
-    color:var(--paper);
+    background:var(--ink); color:var(--paper);
   }
   .ticker-label{
     font-size:12px; color:#9CA3AF; font-weight:500;
     padding:14px 0 0; text-align:center; letter-spacing:.03em;
   }
-  .ticker-track{
-    display:flex; align-items:stretch;
-    overflow:hidden;
-  }
+  .ticker-track{ display:flex; align-items:stretch; overflow:hidden; }
   .ticker-item{
-    flex:1; min-width:180px;
-    padding:26px 20px 32px;
-    text-align:center;
-    border-left:1px solid rgba(255,255,255,0.09);
+    flex:1; min-width:180px; padding:26px 20px 32px; text-align:center;
+    border-inline-start:1px solid rgba(255,255,255,0.09);
   }
-  .ticker-item:first-child{border-right:1px solid rgba(255,255,255,0.09);}
+  .ticker-item:first-child{border-inline-start:none;}
   .ticker-num{
     font-family:'Cairo',sans-serif; font-weight:800;
-    font-size:clamp(22px,3vw,34px);
-    color:var(--paper);
-    display:block;
+    font-size:clamp(22px,3vw,34px); color:var(--paper); display:block;
   }
   .ticker-num .unit{font-size:16px; color:var(--gold); font-weight:700;}
   .ticker-tag{font-size:12.5px; color:#9CA3AF; margin-top:8px; font-weight:500;}
-  .ticker-source{
-    text-align:center; font-size:11.5px; color:#6B7280; padding:0 0 16px;
-  }
+  .ticker-source{ text-align:center; font-size:11.5px; color:#6B7280; padding:0 0 16px; }
 
   /* ===== SECTION SHARED ===== */
   section{padding:104px 0;}
@@ -162,7 +137,6 @@
     letter-spacing:.02em;
   }
   .sec-head h2{font-size:clamp(26px,3.4vw,40px); line-height:1.25;}
-  .sec-head p{margin-top:16px; color:var(--ink-soft); font-size:16.5px;}
 
   /* ===== ABOUT ===== */
   .about{background:var(--paper-2);}
@@ -171,18 +145,17 @@
   }
   .about-portrait{
     aspect-ratio:4/5; border-radius:18px;
-    background:
-      linear-gradient(155deg, var(--teal) 0%, var(--teal-deep) 100%);
+    background:linear-gradient(155deg, var(--teal) 0%, var(--teal-deep) 100%);
     position:relative; overflow:hidden;
-    display:flex; align-items:flex-end; padding:26px;
   }
   .about-portrait::before{
-    content:'';position:absolute; inset:0;
+    content:'';position:absolute; inset:0; z-index:0;
     background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,.14), transparent 45%);
+    pointer-events:none;
   }
-  .about-portrait-tag{
-    position:relative; color:#fff; font-family:'Cairo',sans-serif;
-    font-weight:700; font-size:14px; opacity:.9;
+  .about-portrait img{
+    position:relative; z-index:1;
+    width:100%; height:100%; object-fit:cover; display:block;
   }
   .about-text p{font-size:16.5px; color:var(--ink-soft); margin-bottom:18px;}
   .about-text strong{color:var(--ink); font-weight:600;}
@@ -193,45 +166,38 @@
   }
 
   /* ===== WORK ===== */
-  .work-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
-  }
+  .work-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
   .work-card{
     background:var(--white); border:1px solid var(--line); border-radius:16px;
     overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;
   }
   .work-card:hover{transform:translateY(-4px); box-shadow:0 16px 34px rgba(21,23,27,0.08);}
   .work-frame{
-    aspect-ratio:9/13; background:
-      repeating-linear-gradient(135deg, var(--paper-2) 0 2px, var(--white) 2px 26px);
-    position:relative; display:flex; align-items:center; justify-content:center;
+    aspect-ratio:9/13;
+    background:repeating-linear-gradient(135deg, var(--paper-2) 0 2px, var(--white) 2px 26px);
+    position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
     border-bottom:1px solid var(--line);
   }
-  .work-frame .play{
-    width:52px; height:52px; border-radius:50%; background:var(--ink);
-    display:flex; align-items:center; justify-content:center; opacity:.85;
-  }
-  .work-frame .play svg{width:16px; height:16px; fill:var(--white); margin-right:-2px;}
-  .work-slot{
-    position:absolute; top:14px; right:14px; font-size:11px; font-weight:700;
-    color:var(--muted); background:var(--paper); padding:4px 10px; border-radius:100px;
-    border:1px solid var(--line);
+  /* FIX: this is what makes video/iframe actually fit the card instead
+     of using their raw width/height attributes and blowing out the page */
+  .work-frame video, .work-frame iframe{
+    width:100%; height:100%; object-fit:cover; display:block; border:0;
   }
   .work-meta{padding:18px 18px 20px;}
   .work-cat{font-size:12px; color:var(--teal); font-weight:700; letter-spacing:.02em;}
   .work-title{font-family:'Cairo',sans-serif; font-weight:700; font-size:16px; margin-top:6px; color:var(--ink);}
-  .work-note{font-size:13px; color:var(--muted); margin-top:6px;}
 
   /* ===== EXPERIENCE TIMELINE ===== */
-  .timeline{position:relative; padding-right:2px;}
+  .timeline{position:relative; padding-inline-start:2px;}
   .timeline::before{
-    content:''; position:absolute; top:6px; bottom:6px; right:7px;
+    content:''; position:absolute; top:6px; bottom:6px; inset-inline-start:7px;
     width:1px; background:var(--line);
   }
-  .t-item{position:relative; padding-right:38px; padding-bottom:44px;}
+  .t-item{position:relative; padding-inline-start:38px; padding-bottom:44px;}
   .t-item:last-child{padding-bottom:0;}
   .t-dot{
-    position:absolute; right:0; top:4px; width:15px; height:15px; border-radius:50%;
+    position:absolute; inset-inline-start:0; top:4px; width:15px; height:15px; border-radius:50%;
     background:var(--paper); border:2px solid var(--teal);
   }
   .t-period{font-size:13px; font-weight:700; color:var(--teal); letter-spacing:.02em;}
@@ -243,13 +209,10 @@
 
   /* ===== CONTACT ===== */
   .contact{background:var(--ink); color:var(--paper); border-radius:28px; margin:0 32px; overflow:hidden;}
-  .contact-inner{
-    max-width:1180px; margin:0 auto; padding:90px 48px;
-    display:grid; grid-template-columns:1.1fr .9fr; gap:60px;
-  }
+  .contact-inner{ max-width:1180px; margin:0 auto; padding:90px 48px; }
   .contact h2{font-size:clamp(26px,3.6vw,42px); color:var(--paper); line-height:1.25;}
   .contact p{margin-top:18px; color:#B7BCC6; font-size:16.5px; max-width:460px;}
-  .contact-links{margin-top:36px; display:flex; flex-direction:column; gap:14px;}
+  .contact-links{margin-top:36px; display:flex; flex-direction:column; gap:14px; max-width:420px;}
   .contact-link{
     display:flex; align-items:center; justify-content:space-between;
     padding:18px 22px; border:1px solid rgba(255,255,255,0.14); border-radius:14px;
@@ -257,30 +220,26 @@
   }
   .contact-link:hover{border-color:var(--gold); background:rgba(255,255,255,0.03);}
   .contact-link span.arrow{color:var(--gold); font-family:'Cairo',sans-serif; font-weight:800;}
-  .contact-form{display:flex; flex-direction:column; gap:14px;}
-  .contact-form input, .contact-form textarea{
-    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14);
-    border-radius:12px; padding:16px 18px; color:var(--paper); font-family:inherit;
-    font-size:14.5px;
-  }
-  .contact-form input::placeholder, .contact-form textarea::placeholder{color:#8A8F99;}
-  .contact-form textarea{min-height:110px; resize:vertical;}
-  .contact-form button{
-    background:var(--gold); color:var(--ink); border:none; border-radius:12px;
-    padding:16px; font-weight:700; font-size:15px; cursor:pointer; font-family:inherit;
-    transition:filter .2s;
-  }
-  .contact-form button:hover{filter:brightness(1.08);}
 
-  footer{
-    padding:46px 32px 40px; text-align:center; color:var(--muted); font-size:13.5px;
+  .whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    inset-inline-start: 24px;
+    background: #25D366;
+    width: 58px; height: 58px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000; transition: transform 0.2s;
   }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  footer{ padding:46px 32px 40px; text-align:center; color:var(--muted); font-size:13.5px; }
 
   @media (max-width: 860px){
     .nav-links{display:none;}
     .about-grid{grid-template-columns:1fr;}
     .work-grid{grid-template-columns:repeat(2,1fr);}
-    .contact-inner{grid-template-columns:1fr; padding:60px 28px;}
+    .contact-inner{padding:60px 28px;}
     .ticker-track{flex-wrap:wrap;}
     .ticker-item{min-width:50%; border-bottom:1px solid rgba(255,255,255,.09);}
   }
@@ -294,55 +253,58 @@
 <body>
 
 <header>
-  <nav class="wrap" style="padding-left:0;padding-right:0;">
-    <div class="brand"><span class="dot"></span> ياسين</div>
+  <nav class="wrap" style="padding-inline:0;">
+    <div class="brand"><span class="dot"></span> <span data-ar="ياسين" data-tr="Yassin">ياسين</span></div>
     <div class="nav-links">
-      <a href="#about">عني</a>
-      <a href="#work">الأعمال</a>
-      <a href="#experience">الخبرة</a>
-      <a href="#contact">تواصل</a>
+      <a href="#about" data-ar="عني" data-tr="Hakkımda">عني</a>
+      <a href="#work" data-ar="الأعمال" data-tr="Çalışmalar">الأعمال</a>
+      <a href="#experience" data-ar="الخبرة" data-tr="Deneyim">الخبرة</a>
+      <a href="#contact" data-ar="تواصل" data-tr="İletişim">تواصل</a>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">AR</button>
+      <button class="lang-btn" id="btnTr" onclick="setLang('tr')">TR</button>
     </div>
   </nav>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">استراتيجي محتوى · موشن جرافيك · إنتاج فيديو</div>
-    <h1>أحوّل الأنظمة المعقدة —<br>اقتصاد، تكنولوجيا، جيوسياسة —<br>لسرد بصري <em>يشاهده الملايين</em></h1>
-    <p class="hero-sub">
+    <div class="eyebrow" data-ar="استراتيجي محتوى · موشن جرافيك · إنتاج فيديو" data-tr="İçerik Stratejisti · Motion Grafik · Video Prodüksiyon">استراتيجي محتوى · موشن جرافيك · إنتاج فيديو</div>
+    <h1 data-ar-html="أحوّل الأنظمة المعقدة —<br>اقتصاد، تكنولوجيا، جيوسياسة —<br>لسرد بصري <em>يشاهده الملايين</em>" data-tr-html="Karmaşık sistemleri —<br>ekonomi, teknoloji, jeopolitik —<br>milyonların izlediği <em>görsel anlatıya</em> dönüştürüyorum">أحوّل الأنظمة المعقدة —<br>اقتصاد، تكنولوجيا، جيوسياسة —<br>لسرد بصري <em>يشاهده الملايين</em></h1>
+    <p class="hero-sub" data-ar="أصمّم وأنتج محتوى عربي قصير مبني على هندسة الاحتفاظ (Retention) وتحسين الخوارزميات، يشرح أفكارًا معقدة بوضوح وسرعة تناسب انتباه المشاهد العربي." data-tr="İzleyici tutma mühendisliği ve algoritma optimizasyonuna dayalı kısa Arapça içerikler tasarlıyor ve üretiyorum; karmaşık fikirleri hızlı ve net biçimde anlatıyorum.">
       أصمّم وأنتج محتوى عربي قصير مبني على هندسة الاحتفاظ (Retention) وتحسين الخوارزميات،
       يشرح أفكارًا معقدة بوضوح وسرعة تناسب انتباه المشاهد العربي.
     </p>
-    
   </div>
 
   <div class="ticker-section">
-    <div class="ticker-label">نتائج حقيقية من قناة يوتيوب اشتغلت عليها استراتيجية ومحتوى لمدة سنة كاملة</div>
+    <div class="ticker-label" data-ar="نتائج حقيقية من قناة يوتيوب اشتغلت عليها استراتيجية ومحتوى لمدة سنة كاملة" data-tr="Bir yıl boyunca strateji ve içerik ürettiğim bir YouTube kanalından gerçek sonuçlar">نتائج حقيقية من قناة يوتيوب اشتغلت عليها استراتيجية ومحتوى لمدة سنة كاملة</div>
     <div class="wrap">
       <div class="ticker-track">
         <div class="ticker-item">
           <span class="ticker-num">10.9<span class="unit">M</span></span>
-          <div class="ticker-tag">مشاهدة على يوتيوب</div>
+          <div class="ticker-tag" data-ar="مشاهدة على يوتيوب" data-tr="YouTube görüntülenme">مشاهدة على يوتيوب</div>
         </div>
         <div class="ticker-item">
           <span class="ticker-num">421.9<span class="unit">K</span></span>
-          <div class="ticker-tag">ساعة مشاهدة</div>
+          <div class="ticker-tag" data-ar="ساعة مشاهدة" data-tr="izlenme saati">ساعة مشاهدة</div>
         </div>
         <div class="ticker-item">
           <span class="ticker-num">+48.8<span class="unit">K</span></span>
-          <div class="ticker-tag">مشترك جديد</div>
+          <div class="ticker-tag" data-ar="مشترك جديد" data-tr="yeni abone">مشترك جديد</div>
         </div>
         <div class="ticker-item">
           <span class="ticker-num">15.3<span class="unit">M</span></span>
-          <div class="ticker-tag">وصول عبر فيسبوك وإنستقرام</div>
+          <div class="ticker-tag" data-ar="وصول عبر فيسبوك وإنستقرام" data-tr="Facebook ve Instagram'da erişim">وصول عبر فيسبوك وإنستقرام</div>
         </div>
         <div class="ticker-item">
           <span class="ticker-num">+545<span class="unit">%</span></span>
-          <div class="ticker-tag">نمو متابعين إنستقرام</div>
+          <div class="ticker-tag" data-ar="نمو متابعين إنستقرام" data-tr="Instagram takipçi artışı">نمو متابعين إنستقرام</div>
         </div>
       </div>
     </div>
-    <div class="ticker-source">لقطات من لوحات تحليلات حقيقية متاحة للمراجعة عند الطلب</div>
+    <div class="ticker-source" data-ar="لقطات من لوحات تحليلات حقيقية متاحة للمراجعة عند الطلب" data-tr="Gerçek analiz panellerinden görüntüler, talep üzerine incelemeye açık">لقطات من لوحات تحليلات حقيقية متاحة للمراجعة عند الطلب</div>
   </div>
 </section>
 
@@ -350,29 +312,27 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="about-portrait">
-        <div class="about-portrait-tag"> 
-            <img src="qq.img.jpeg">
-        </div>
+        <img src="qq.img.jpeg" alt="ياسين">
       </div>
       <div class="about-text">
-        <div class="sec-eyebrow">نبذة</div>
-        <h2 style="margin-bottom:22px;">مصمم محتوى بيفكر متل مهندس أنظمة، وينفّذ متل صانع أفلام</h2>
-        <p>
-          أنا <strong>ياسين  </strong>، سوري مقيم في إسطنبول، متخصص في صناعة محتوى رقمي عربي
+        <div class="sec-eyebrow" data-ar="نبذة" data-tr="Hakkımda">نبذة</div>
+        <h2 style="margin-bottom:22px;" data-ar="مصمم محتوى بيفكر متل مهندس أنظمة، وينفّذ متل صانع أفلام" data-tr="Sistem mühendisi gibi düşünen, yönetmen gibi üreten bir içerik tasarımcısı">مصمم محتوى بيفكر متل مهندس أنظمة، وينفّذ متل صانع أفلام</h2>
+        <p data-ar-html="أنا <strong>ياسين</strong>، سوري مقيم في إسطنبول، متخصص في صناعة محتوى رقمي عربي يجمع بين <strong>القصة السينمائية</strong> و<strong>هندسة الخوارزمية</strong>. خلال السنة الأخيرة قدت استراتيجية محتوى قناة وصلت مشاهداتها لأكثر من 10.9 مليون مشاهدة، بالاعتماد على سكربتات مضغوطة، فتحات فضول (Open Loops)، ومكافآت بصرية كل بضع ثواني للحفاظ على الانتباه." data-tr-html="Ben <strong>Yassin</strong>, İstanbul'da yaşayan Suriyeli bir içerik üreticisiyim; <strong>sinematik anlatı</strong> ile <strong>algoritma mühendisliğini</strong> birleştiren Arapça dijital içerikler üretiyorum. Geçen yıl yönettiğim bir kanal stratejisiyle 10,9 milyondan fazla izlenmeye ulaştım; sıkıştırılmış senaryolar, merak açıklıkları (Open Loops) ve her birkaç saniyede bir görsel ödüllerle dikkati koruyorum.">
+          أنا <strong>ياسين</strong>، سوري مقيم في إسطنبول، متخصص في صناعة محتوى رقمي عربي
           يجمع بين <strong>القصة السينمائية</strong> و<strong>هندسة الخوارزمية</strong>.
           خلال السنة الأخيرة قدت استراتيجية محتوى قناة وصلت مشاهداتها لأكثر من 10.9 مليون مشاهدة،
           بالاعتماد على سكربتات مضغوطة، فتحات فضول (Open Loops)، ومكافآت بصرية كل بضع ثواني للحفاظ على الانتباه.
         </p>
-        <p>
-          شغلي مبني على مبدأ واحد: كل ثانية لازم تبرر وجودها. مفيش حشو، ومفيش مشهد بدون وظيفة 
+        <p data-ar="شغلي مبني على مبدأ واحد: كل ثانية لازم تبرر وجودها. مفيش حشو، ومفيش مشهد بدون وظيفة — إما يشد الانتباه، وإما يوصل فكرة، وإما يدفع المشاهد للمشهد يلي بعده." data-tr="İşim tek bir ilkeye dayanıyor: her saniyenin bir gerekçesi olmalı. Gereksiz sahne yok — her sahne ya dikkat çeker, ya bir fikir aktarır, ya da izleyiciyi bir sonraki sahneye taşır.">
+          شغلي مبني على مبدأ واحد: كل ثانية لازم تبرر وجودها. مفيش حشو، ومفيش مشهد بدون وظيفة —
           إما يشد الانتباه، وإما يوصل فكرة، وإما يدفع المشاهد للمشهد يلي بعده.
         </p>
         <div class="about-pills">
-          <span class="pill">موشن جرافيك</span>
-          <span class="pill">مونتاج فيديو</span>
-          <span class="pill">كتابة سكربت مضغوط</span>
-          <span class="pill">استراتيجية قناة</span>
-          <span class="pill">تحليل خوارزميات المنصات</span>
+          <span class="pill" data-ar="موشن جرافيك" data-tr="Motion Grafik">موشن جرافيك</span>
+          <span class="pill" data-ar="مونتاج فيديو" data-tr="Video Kurgu">مونتاج فيديو</span>
+          <span class="pill" data-ar="كتابة سكربت مضغوط" data-tr="Sıkıştırılmış Senaryo">كتابة سكربت مضغوط</span>
+          <span class="pill" data-ar="استراتيجية قناة" data-tr="Kanal Stratejisi">استراتيجية قناة</span>
+          <span class="pill" data-ar="تحليل خوارزميات المنصات" data-tr="Platform Algoritma Analizi">تحليل خوارزميات المنصات</span>
         </div>
       </div>
     </div>
@@ -382,88 +342,81 @@
 <section id="work">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">الأعمال</div>
-      <h2>نماذج مختارة</h2>
+      <div class="sec-eyebrow" data-ar="الأعمال" data-tr="Çalışmalar">الأعمال</div>
+      <h2 data-ar="نماذج مختارة" data-tr="Seçilmiş Örnekler">نماذج مختارة</h2>
     </div>
     <div class="work-grid">
       <!-- WORK CARD 1 -->
       <div class="work-card">
         <div class="work-frame">
-          <video width="10000" height="540" controls autoplay muted loop>
-  <source src="123q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="123q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">عيادة</div>
-          <div class="work-title">   </div>
-          
+          <div class="work-cat" data-ar="عيادة" data-tr="Klinik">عيادة</div>
+          <div class="work-title" data-ar="فيديو ترويجي" data-tr="Tanıtım Videosu">فيديو ترويجي</div>
         </div>
       </div>
       <!-- WORK CARD 2 -->
       <div class="work-card">
         <div class="work-frame">
-            <video width="10000" height="540" controls autoplay muted loop>
-  <source src="2q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="2q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">مطعم</div>
-          <div class="work-title">  بيت هاوس</div>
-          </div>
+          <div class="work-cat" data-ar="مطعم" data-tr="Restoran">مطعم</div>
+          <div class="work-title">بيت هاوس</div>
+        </div>
       </div>
       <!-- WORK CARD 3 -->
       <div class="work-card">
         <div class="work-frame">
-            <video width="10000" height="540" controls autoplay muted loop>
-  <source src="3q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="3q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">مطعم</div>
-          <div class="work-title">  بيت هاوس</div>
-          </div>
+          <div class="work-cat" data-ar="مطعم" data-tr="Restoran">مطعم</div>
+          <div class="work-title">بيت هاوس</div>
+        </div>
       </div>
       <!-- WORK CARD 4 -->
-   <div class="work-card">
+      <div class="work-card">
         <div class="work-frame">
-            <video width="10000" height="540" controls autoplay muted loop>
-  <source src="8q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="8q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">يوتيوب</div>
-          <div class="work-title">   ابو ياسين الدوماني</div>
-          </div>
-       </div>
+          <div class="work-cat" data-ar="يوتيوب" data-tr="YouTube">يوتيوب</div>
+          <div class="work-title">ابو ياسين الدوماني</div>
+        </div>
+      </div>
       <!-- WORK CARD 5 -->
       <div class="work-card">
         <div class="work-frame">
-            <video width="10000" height="540" controls autoplay muted loop>
-  <source src="9q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="9q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">تعليمي</div>
-          <div class="work-title">    ياسين </div>
-          </div>
+          <div class="work-cat" data-ar="تعليمي" data-tr="Eğitim">تعليمي</div>
+          <div class="work-title">ياسين</div>
+        </div>
       </div>
       <!-- WORK CARD 6 -->
       <div class="work-card">
         <div class="work-frame">
-            <video width="10000" height="540" controls autoplay muted loop>
-  <source src="90q.mp4" type="video/mp4">
-</video>
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <video controls autoplay muted loop playsinline>
+            <source src="90q.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="work-meta">
-          <div class="work-cat">تعليمي</div>
-          <div class="work-title">    ياسين </div>
-          </div>
+          <div class="work-cat" data-ar="تعليمي" data-tr="Eğitim">تعليمي</div>
+          <div class="work-title">ياسين</div>
+        </div>
       </div>
     </div>
   </div>
@@ -472,33 +425,31 @@
 <section class="about" id="experience">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-eyebrow">الخبرة</div>
-      <h2>مسار العمل</h2>
-      
+      <div class="sec-eyebrow" data-ar="الخبرة" data-tr="Deneyim">الخبرة</div>
+      <h2 data-ar="مسار العمل" data-tr="Kariyer Yolu">مسار العمل</h2>
     </div>
     <div class="timeline">
       <div class="t-item">
         <div class="t-dot"></div>
-        <div class="t-period">2025 — حتى الآن</div>
-        <div class="t-role">استراتيجي محتوى ومنتج فيديوهات طويلة وقصيرة</div>
-        <div class="t-desc">
+        <div class="t-period" data-ar="2025 — حتى الآن" data-tr="2025 — Günümüz">2025 — حتى الآن</div>
+        <div class="t-role" data-ar="استراتيجي محتوى ومنتج فيديوهات طويلة وقصيرة" data-tr="İçerik Stratejisti ve Uzun/Kısa Video Prodüktörü">استراتيجي محتوى ومنتج فيديوهات طويلة وقصيرة</div>
+        <div class="t-desc" data-ar="إدارة استراتيجية محتوى قناة عربية على يوتيوب وإنستقرام وفيسبوك، من الفكرة حتى النشر والتحليل." data-tr="YouTube, Instagram ve Facebook'ta bir Arapça kanalın içerik stratejisini fikirden yayına ve analize kadar yönettim.">
           إدارة استراتيجية محتوى قناة عربية على يوتيوب وإنستقرام وفيسبوك، من الفكرة حتى النشر والتحليل.
         </div>
         <div class="t-stats">
-          <div class="t-stat"><b>10.9M</b> مشاهدة</div>
-          <div class="t-stat"><b>421.9K</b> ساعة مشاهدة</div>
-          <div class="t-stat"><b>+48.8K</b> مشترك</div>
+          <div class="t-stat"><b>10.9M</b> <span data-ar="مشاهدة" data-tr="görüntülenme">مشاهدة</span></div>
+          <div class="t-stat"><b>421.9K</b> <span data-ar="ساعة مشاهدة" data-tr="izlenme saati">ساعة مشاهدة</span></div>
+          <div class="t-stat"><b>+48.8K</b> <span data-ar="مشترك" data-tr="abone">مشترك</span></div>
         </div>
       </div>
       <div class="t-item">
         <div class="t-dot"></div>
-        <div class="t-period"> 2026</div>
-        <div class="t-role">منتج فيديو ومحرر موشن جرافيك</div>
-        <div class="t-desc">
-          إنتاج فيديوهات تفسيرية قصيرة (٣٠–٤٥ ثانية) وتصميم موشن جرافيك   .
+        <div class="t-period">2026</div>
+        <div class="t-role" data-ar="منتج فيديو ومحرر موشن جرافيك" data-tr="Video Prodüktörü ve Motion Grafik Editörü">منتج فيديو ومحرر موشن جرافيك</div>
+        <div class="t-desc" data-ar="إنتاج فيديوهات تفسيرية قصيرة (٣٠–٤٥ ثانية) وتصميم موشن جرافيك." data-tr="30-45 saniyelik kısa açıklayıcı videolar üretimi ve motion grafik tasarımı.">
+          إنتاج فيديوهات تفسيرية قصيرة (٣٠–٤٥ ثانية) وتصميم موشن جرافيك.
         </div>
       </div>
-     
     </div>
   </div>
 </section>
@@ -506,48 +457,58 @@
 <section id="contact">
   <div class="contact wrap">
     <div class="contact-inner">
-      <div>
-        <div class="sec-eyebrow" style="color:#D8B85C;">تواصل</div>
-        <h2>عندك فكرة أو مشروع؟<br>خلينا نحوّلها لمحتوى يشاهده الملايين</h2>
-        <p>راسلني وخبرني عن مشروعك، المنصة المستهدفة، والجمهور — وبرجع لك بخطة عمل واضحة.</p>
-        <div class="contact-links">
-          <a href="mailto:yasyny119@gmail.com" class="contact-link">yasyny119@gmail.com <span class="arrow">↖</span></a>
-          <a href="https://wa.me/905550960595" target="_blank" class="whatsapp-float">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
-        <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.06L2 22l5.06-1.32C8.5 21.5 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.1c-.24.66-1.4 1.26-1.94 1.32-.5.06-1.02.28-3.4-.72-2.86-1.2-4.7-4.08-4.84-4.28-.14-.2-1.16-1.54-1.16-2.94 0-1.4.72-2.08.98-2.36.26-.28.56-.34.76-.34.2 0 .4 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .9 2.14.08.14.13.3.02.5-.1.2-.16.32-.3.5-.15.18-.32.4-.46.54-.15.15-.3.32-.13.62.17.3.75 1.24 1.62 2 1.11.99 2.05 1.3 2.35 1.44.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 2 .95.3.15.5.22.57.34.08.13.08.75-.16 1.4z"/>
-    </svg>
-</a>
-
-<style>
-.whatsapp-float {
-    position: fixed;
-    bottom: 24px;
-    left: 24px;
-    background: #25D366;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 1000;
-    transition: transform 0.2s;
-}
-.whatsapp-float:hover {
-    transform: scale(1.1);
-}
-</style>
-        </div>
+      <div class="sec-eyebrow" style="color:#D8B85C;" data-ar="تواصل" data-tr="İletişim">تواصل</div>
+      <h2 data-ar-html="عندك فكرة أو مشروع؟<br>خلينا نحوّلها لمحتوى يشاهده الملايين" data-tr-html="Bir fikrin veya projen mi var?<br>Onu milyonların izlediği içeriğe dönüştürelim">عندك فكرة أو مشروع؟<br>خلينا نحوّلها لمحتوى يشاهده الملايين</h2>
+      <p data-ar="راسلني وخبرني عن مشروعك، المنصة المستهدفة، والجمهور — وبرجع لك بخطة عمل واضحة." data-tr="Bana projeni, hedef platformu ve kitleni anlat — sana net bir aksiyon planıyla dönüş yapayım.">راسلني وخبرني عن مشروعك، المنصة المستهدفة، والجمهور — وبرجع لك بخطة عمل واضحة.</p>
+      <div class="contact-links">
+        <a href="mailto:yasyny119@gmail.com" class="contact-link">yasyny119@gmail.com <span class="arrow">↖</span></a>
       </div>
-    
     </div>
   </div>
 </section>
 
+<a href="https://wa.me/905550960595" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+    <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.06L2 22l5.06-1.32C8.5 21.5 10.2 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.1c-.24.66-1.4 1.26-1.94 1.32-.5.06-1.02.28-3.4-.72-2.86-1.2-4.7-4.08-4.84-4.28-.14-.2-1.16-1.54-1.16-2.94 0-1.4.72-2.08.98-2.36.26-.28.56-.34.76-.34.2 0 .4 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .9 2.14.08.14.13.3.02.5-.1.2-.16.32-.3.5-.15.18-.32.4-.46.54-.15.15-.3.32-.13.62.17.3.75 1.24 1.62 2 1.11.99 2.05 1.3 2.35 1.44.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.7.8 2 .95.3.15.5.22.57.34.08.13.08.75-.16 1.4z"/>
+  </svg>
+</a>
+
 <footer>
-  © 2026 ياسين   — كل الحقوق محفوظة
+  <span data-ar="© 2026 ياسين — كل الحقوق محفوظة" data-tr="© 2026 Yassin — Tüm hakları saklıdır">© 2026 ياسين — كل الحقوق محفوظة</span>
 </footer>
+
+<script>
+function setLang(lang){
+  const html = document.documentElement;
+  if(lang === 'tr'){
+    html.setAttribute('lang','tr');
+    html.setAttribute('dir','ltr');
+    document.getElementById('btnTr').classList.add('active');
+    document.getElementById('btnAr').classList.remove('active');
+  } else {
+    html.setAttribute('lang','ar');
+    html.setAttribute('dir','rtl');
+    document.getElementById('btnAr').classList.add('active');
+    document.getElementById('btnTr').classList.remove('active');
+  }
+
+  // plain text swaps
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    const val = lang === 'tr' ? el.getAttribute('data-tr') : el.getAttribute('data-ar');
+    if(val !== null) el.textContent = val;
+  });
+
+  // html swaps (for elements containing <br>, <em>, <strong>)
+  document.querySelectorAll('[data-ar-html]').forEach(el=>{
+    const val = lang === 'tr' ? el.getAttribute('data-tr-html') : el.getAttribute('data-ar-html');
+    if(val !== null) el.innerHTML = val;
+  });
+
+  document.title = lang === 'tr'
+    ? 'Yassin — İçerik Stratejisti & Motion Grafik Prodüktörü'
+    : 'ياسين — استراتيجي محتوى ومنتج موشن جرافيك';
+}
+</script>
 
 </body>
 </html>
